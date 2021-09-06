@@ -1,52 +1,32 @@
 import { Link } from 'react-router-dom'
+import HeaderActions from './HeaderActions'
 
 function Header() {
     return (
-        <header>
-            <nav className='py-2 px-8 flex bg-[#232F3E] space-x-6'>
-                <Link to='/'>
-                    <img
-                        className='mt-1 max-w-[90px] rounded-md px-2'
-                        src='http://pngimg.com/uploads/amazon/amazon_PNG11.png'
-                        alt='Amazon Logo'
-                    />
-                </Link>
-                <form className='h-full flex flex-auto'>
-                    <div className='flex flex-auto items-center rounded-md'>
-                        <input className='px-3 py-1 rounded-l flex-auto focus:outline-none' type='text' placeholder='Search' />
-                        <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#f5a946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                    </div>
-                </form>
+        <header className='sticky top-0'>
+            <nav className='py-2 px-4 flex bg-[#131A22] space-x-6'>
+                <div id='nav-logo'>
+                    <Link to='/'>
+                        <img
+                            className='mt-1 max-w-[90px] rounded-md px-2'
+                            src='http://pngimg.com/uploads/amazon/amazon_PNG11.png'
+                            alt='Amazon Logo'
+                        />
+                    </Link>
+                </div>
+                <div className='flex items-center rounded-md'>
+                    <input className='px-3 py-1 rounded-l focus:outline-none' type='text' placeholder='Search' />
+                    <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#f5a946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                </div>
                 <div className='flex space-x-4'>
                     <Link to='/login'>
-                        <div className='flex flex-col'>
-                            <span className='text-xs text-gray-100'>
-                                Hello User
-                            </span>
-                            <span className='text-sm text-white font-bold'>
-                                Sign In
-                            </span>
-                        </div>
+                        <HeaderActions primary='Hello User' secondary='Sign In' />
                     </Link>
                     <Link to='/login'>
-                        <div className='flex flex-col'>
-                            <span className='text-xs text-gray-100'>
-                                Returns
-                            </span>
-                            <span className='text-sm text-white font-bold'>
-                                & Orders
-                            </span>
-                        </div>
+                        <HeaderActions primary='Returns' secondary='& Orders' />
                     </Link>
                     <Link to='/login'>
-                        <div className='flex flex-col'>
-                            <span className='text-xs text-gray-100'>
-                                Your
-                            </span>
-                            <span className='text-sm text-white font-bold'>
-                                Prime
-                            </span>
-                        </div>
+                        <HeaderActions primary='Your' secondary='Prime' />
                     </Link>
                     <Link to='/checkout'>
                         <div className='flex items-center space-x-2 text-white'>
