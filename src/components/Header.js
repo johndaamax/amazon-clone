@@ -3,24 +3,24 @@ import HeaderActions from './HeaderActions'
 
 function Header() {
     return (
-        <header className='sticky top-0'>
-            <nav className='py-2 px-4 flex bg-[#131A22] space-x-6'>
+        <header className='static top-0'>
+            <nav className='py-2 px-4 flex bg-[#131A22] space-x-6 min-w-max'>
                 <div id='nav-logo'>
                     <Link to='/'>
                         <img
-                            className='mt-1 max-w-[90px] rounded-md px-2'
+                            className='mt-1 max-w-[90px] px-2'
                             src='http://pngimg.com/uploads/amazon/amazon_PNG11.png'
                             alt='Amazon Logo'
                         />
                     </Link>
                 </div>
-                <div className='flex items-center rounded-md'>
-                    <input className='px-3 py-1 rounded-l focus:outline-none' type='text' placeholder='Search' />
+                <div className='flex flex-1 items-center rounded-md min-w-[15rem]'>
+                    <input className='px-3 py-1 w-full rounded-l focus:outline-none' type='text' placeholder='Search' />
                     <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#f5a946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
                 <div className='flex space-x-4'>
                     <Link to='/login'>
-                        <HeaderActions primary='Hello User' secondary='Sign In' />
+                        <HeaderActions primary='Hello, Sign In' secondary='Accounts & Lists' />
                     </Link>
                     <Link to='/login'>
                         <HeaderActions primary='Returns' secondary='& Orders' />

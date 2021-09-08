@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header'
+import Home from './pages/Home'
 
 function App() {
   return (
@@ -7,9 +8,10 @@ function App() {
       <Switch>
         <Route path='/' exact>
           <Header />
-          <h1>Welcome to Amazon Clone. WIP</h1>
+          <Home />
         </Route>
         <Route path='/checkout' exact>
+          <Header />
           <h1>Checkout Page</h1>
         </Route>
         <Route path='/login' exact>
