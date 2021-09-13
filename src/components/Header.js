@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
 import HeaderActions from './HeaderActions'
 
+import { useUserContext } from '../context/UserStateProvider'
+
 function Header() {
+
+    const { userState } = useUserContext()
     return (
         <header className='static top-0'>
             <nav className='py-2 px-4 flex bg-[#131A22] space-x-6 min-w-max'>
@@ -16,7 +20,7 @@ function Header() {
                 </div>
                 <div className='flex flex-1 items-center rounded-md min-w-[15rem]'>
                     <input className='px-3 py-1 w-full rounded-l focus:outline-none' type='text' placeholder='Search' />
-                    <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#f5a946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                    <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#F5A946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
                 <div className='flex space-x-4'>
                     <Link to='/login'>
@@ -31,7 +35,7 @@ function Header() {
                     <Link to='/checkout'>
                         <div className='flex items-center space-x-2 text-white'>
                             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                            <span className='text-center font-bold'>0</span>
+                            <span className='text-center font-bold'>{userState.basket.length}</span>
                         </div>
                     </Link>
                 </div>
