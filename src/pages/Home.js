@@ -24,7 +24,7 @@ function Home() {
     }, [fetchProducts]);
 
     return (
-        <div className='max-w-[1536px] mx-auto'>
+        <div className='max-w-[1536px] mx-auto font-body'>
             <img
                 id='banner-image'
                 className='w-full z-[-1] mb-[-150px] min-w-[762px]'

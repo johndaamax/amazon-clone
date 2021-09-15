@@ -24,16 +24,15 @@ function Product({ id, title, image, price, rating, shippingWeight }) {
                 <div className='flex'>
                     <i
                         className='h-[18px] w-[80px]'
-                        style={
-                            {
-                                backgroundImage: `url(./rating.png)`,
-                                backgroundPosition: `${ratingCoords.xPos}px ${ratingCoords.yPos}px`,
-                                backgroundSize: '512px 256px'
-                            }}></i>
+                        style={{
+                            backgroundImage: `url(./rating.png)`,
+                            backgroundPosition: `${ratingCoords.xPos}px ${ratingCoords.yPos}px`,
+                            backgroundSize: '512px 256px'
+                        }}>
+                    </i>
                 </div>
                 <p>{`Shipping Weight: ${shippingWeight.value} ${shippingWeight.unit}`}</p>
             </div>
-
             <button
                 className='p-1 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-solid border-[#A88734]'
                 onClick={() => addToBasket(dispatch, { id, title, image, price, rating })}

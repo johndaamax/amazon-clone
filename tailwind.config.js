@@ -7,6 +7,10 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      'display': ['"Amazon Ember Display"', 'Arial', 'sans-serif'],
+      'body': ['"Amazon Ember"', 'Arial', 'sans-serif']
+    },
     extend: {},
   },
   variants: {

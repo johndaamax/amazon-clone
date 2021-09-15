@@ -10,3 +10,38 @@ body {
     mask-image: linear-gradient(0deg, transparent, black);
     -webkit-mask-image: linear-gradient(0deg, transparent, black);
 }
+
+/**************************     FONTS     ***********************/
+
+@font-face {
+    font-family: 'Amazon Ember Bold';
+    src: url(./fonts/AmazonEmber_Bd.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember Bold Italic';
+    src: url(./fonts/AmazonEmber_BdIt.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember Light';
+    src: url(./fonts/AmazonEmber_Lt.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember Light Italic';
+    src: url(./fonts/AmazonEmber_LtIt.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember';
+    src: url(./fonts/AmazonEmber_Rg.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember Italic';
+    src: url(./fonts/AmazonEmber_RgIt.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember Display Bold';
+    src: url(./fonts/AmazonEmberDisplay_Bd.woff) format('woff');
+}
+@font-face {
+    font-family: 'Amazon Ember Display';
+    src: url(./fonts/AmazonEmberDisplay_Rg.woff) format('woff');
+}

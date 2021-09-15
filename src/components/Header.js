@@ -7,7 +7,7 @@ function Header() {
 
     const { userState } = useUserContext()
     return (
-        <header className='static top-0'>
+        <header className='static top-0 font-display'>
             <nav className='py-2 px-4 flex bg-[#131A22] space-x-6 min-w-max'>
                 <div id='nav-logo'>
                     <Link to='/'>
