@@ -5,3 +5,8 @@
 body {
     background-color: rgb(237, 237, 237);
 }
+
+#banner-image {
+    mask-image: linear-gradient(0deg, transparent, black);
+    -webkit-mask-image: linear-gradient(0deg, transparent, black);
+}

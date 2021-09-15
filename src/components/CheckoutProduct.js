@@ -14,8 +14,8 @@ function CheckoutProduct({ id, title, image, price, rating }) {
             <div className='pl-4'>
                 <p className='text-lg font-bold'>{title}</p>
                 <p>
-                    <small>£</small>
-                    <strong>{price}</strong>
+                    <small>$</small>
+                    <strong>{price.value}</strong>
                 </p>
                 <div className='flex'>
                     {
@@ -25,7 +25,7 @@ function CheckoutProduct({ id, title, image, price, rating }) {
                     }
                 </div>
                 <button
-                    className='px-2 py-1 mt-2 rounded-md bg-[#FEBD69] hover:bg-[#F5A946] border border-solid border-[#A88734]'
+                    className='p-1 mt-2 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-solid border-[#A88734]'
                     onClick={() => { removeFromBasket(dispatch, id) }}>Remove from basket</button>
             </div>
         </div>
