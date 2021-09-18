@@ -11,7 +11,14 @@ module.exports = {
       'display': ['"Amazon Ember Display"', 'Arial', 'sans-serif'],
       'body': ['"Amazon Ember"', 'Arial', 'sans-serif']
     },
-    extend: {},
+    boxShadow: {
+      input: '0 0 3px 2px rgb(228 121 17 / 50%)'
+    },
+    extend: {
+      backgroundImage: {
+        'button-primary': 'linear-gradient(to bottom, #F7DFA5, #F0C14B)'
+      }
+    }
   },
   variants: {
     extend: {},

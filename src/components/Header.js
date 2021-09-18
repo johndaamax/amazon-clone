@@ -8,7 +8,7 @@ function Header() {
     const { userState } = useUserContext()
     return (
         <header className='static top-0 font-display'>
-            <nav className='py-2 px-4 flex bg-[#131A22] space-x-6 min-w-max'>
+            <nav className='py-2 px-4 flex bg-[#131A22] space-x-6'>
                 <div id='nav-logo'>
                     <Link to='/'>
                         <img
@@ -18,7 +18,7 @@ function Header() {
                         />
                     </Link>
                 </div>
-                <div className='flex flex-1 items-center rounded-md min-w-[15rem]'>
+                <div className='flex flex-1 items-center rounded-md'>
                     <input className='px-3 py-1 w-full rounded-l focus:outline-none' type='text' placeholder='Search' />
                     <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#F5A946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>

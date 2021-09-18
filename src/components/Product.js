@@ -3,8 +3,14 @@ import { useUserContext, addToBasket } from '../context/UserStateProvider'
 import { ratingMap } from '../helpers/ratingStarHelper'
 
 function Product({ id, title, image, price, rating, shippingWeight }) {
-    const { dispatch } = useUserContext();
+    const { userState, dispatch } = useUserContext();
     const ratingCoords = ratingMap.get(rating)
+
+    const getProductQuantityInBasket = () => {
+        return userState.basket.filter(prod => prod.id === id).length;
+    }
+
+    const productsInBasket = getProductQuantityInBasket()
 
     return (
         <div className='flex flex-col m-4 min-w-[180px] bg-white p-4 z-[1]'>
@@ -36,7 +42,7 @@ function Product({ id, title, image, price, rating, shippingWeight }) {
             <button
                 className='p-1 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-solid border-[#A88734]'
                 onClick={() => addToBasket(dispatch, { id, title, image, price, rating })}
-            >Add to basket
+            >{productsInBasket > 0 ? `Added to basket (x${productsInBasket})` : `Add to basket`}
             </button>
         </div>
     )

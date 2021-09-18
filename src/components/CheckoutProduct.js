@@ -6,7 +6,7 @@ function CheckoutProduct({ id, title, image, price, rating }) {
     const ratingCoords = ratingMap.get(rating);
 
     return (
-        <div className='flex my-3 bg-white'>
+        <div className='flex my-3 bg-white border-b border-gray-300'>
             <img
                 className='object-contain w-[180px] h-[180px]'
                 src={image}
