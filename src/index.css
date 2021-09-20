@@ -45,3 +45,19 @@ body {
     font-family: 'Amazon Ember Display';
     src: url(./fonts/AmazonEmberDisplay_Rg.woff) format('woff');
 }
+
+@layer components {
+    .link-minor {
+        @apply text-sm hover:underline text-blue-500 hover:text-yellow-500;
+    }
+    .input-error {
+        @apply border-red-500;
+        box-shadow: 0 0 0 3px rgb(221 0 0 / 10%) inset;
+    }
+    .button-active {
+        border-color: #a88734 #9c7e31 #846a29;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 20%) inset;
+        background-color: #f0c14b;
+        background-image: none;
+    }
+}

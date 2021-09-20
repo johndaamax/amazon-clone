@@ -22,7 +22,7 @@ function Checkout() {
                     </div>
                     <div>
                         <h2 className='font-bold text-xl'>Your Amazon Basket is empty</h2>
-                        <Link to='/' className='text-sm hover:underline text-blue-500 hover:text-yellow-500'>Shop today's deals </Link>
+                        <Link to='/' className='link-minor'>Shop today's deals </Link>
                         <div className='my-4 space-x-6'>
                             <button className='py-1 px-2 bg-[#FFD814] hover:bg-[#F0CC18] rounded-lg border border-[#FCD200]'>
                                 <Link to='/login'>Sign in to your account</Link>
