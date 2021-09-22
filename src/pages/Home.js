@@ -4,7 +4,6 @@ import Product from "../components/Product"
 function Home() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null)
-    console.log(products)
     const fetchProducts = useCallback(async () => {
         try {
             setError(null)

@@ -1,8 +1,8 @@
-import { useUserContext, removeFromBasket } from '../context/UserStateProvider';
+import { useBasketContext, removeFromBasket } from '../context/BasketProvider';
 import { ratingMap } from '../helpers/ratingStarHelper';
 
 function CheckoutProduct({ id, title, image, price, rating }) {
-    const { dispatch } = useUserContext();
+    const { dispatch } = useBasketContext();
     const ratingCoords = ratingMap.get(rating);
 
     return (

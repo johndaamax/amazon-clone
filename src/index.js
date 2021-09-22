@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { UserStateProvider } from './context/UserStateProvider';
-import { initialState, reducer } from './reducer';
+import { BasketProvider } from './context/BasketProvider';
+import { AuthProvider } from './context/AuthProvider';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserStateProvider initialState={initialState} reducer={reducer}>
-      <App />
-    </UserStateProvider>
+    <BasketProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BasketProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

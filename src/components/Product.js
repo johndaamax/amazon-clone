@@ -1,13 +1,13 @@
 import React from 'react'
-import { useUserContext, addToBasket } from '../context/UserStateProvider'
+import { useBasketContext, addToBasket } from '../context/BasketProvider'
 import { ratingMap } from '../helpers/ratingStarHelper'
 
 function Product({ id, title, image, price, rating, shippingWeight }) {
-    const { userState, dispatch } = useUserContext();
+    const { basket, dispatch } = useBasketContext();
     const ratingCoords = ratingMap.get(rating)
 
     const getProductQuantityInBasket = () => {
-        return userState.basket.filter(prod => prod.id === id).length;
+        return basket.filter(prod => prod.id === id).length;
     }
 
     const productsInBasket = getProductQuantityInBasket()
