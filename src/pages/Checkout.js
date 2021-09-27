@@ -21,11 +21,11 @@ function Checkout() {
             {basket.length === 0 ?
                 <div className='flex p-6 border-b border-gray-300 w-full space-x-6'>
                     <div className='w-[30%] space-x-2'>
-                        <img src={'./checkout_fluff.svg'} alt='Checkout Fluff' />
+                        <img src={isLoggedIn ? './rolling_cart.svg' : './checkout_fluff.svg'} alt='Checkout Fluff' />
                     </div>
-                    <div>
-                        <h2 className='font-bold text-xl'>Your Amazon Basket is empty</h2>
-                        <Link to='/' className='link-minor'>Shop today's deals </Link>
+                    <div className='flex flex-col justify-center'>
+                        <h2 className='font-bold text-xl lg:text-3xl'>Your Amazon Basket is empty</h2>
+                        <Link to='/' className='link-minor text-blue-500'>Shop today's deals </Link>
                         {!isLoggedIn &&
                             <div className='my-4 space-x-6'>
                                 <button className='py-1 px-2 bg-[#FFD814] hover:bg-[#F0CC18] rounded-lg border border-[#FCD200]'>

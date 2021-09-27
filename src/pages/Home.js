@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react"
 import Product from "../components/Product"
 
+import Modal from "../components/Modal";
+
 function Home() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null)
@@ -45,6 +47,14 @@ function Home() {
                     ))}
                 </div>
             }
+            {/* <Modal>
+                <div className='bg-white p-4'>
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                    </ul>
+                </div>
+            </Modal> */}
         </div>
     )
 }

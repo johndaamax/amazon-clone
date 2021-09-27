@@ -1,17 +1,21 @@
 import { useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { omit } from 'lodash'
 
 import { validateName, validateEmail, validatePassword } from '../validationRules';
 import { loginWithEmail, signupNewUser } from '../api/api';
 import { useAuthContext, login } from '../context/AuthProvider'
 
-function AuthForm() {
+function LoginForm() {
     const [isLogin, setIsLogin] = useState(true);
     const [inputFieldErrors, setInputFieldErrors] = useState({});
+    const [error, setError] = useState(null)
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+    const history = useHistory()
+
+    console.log(error)
 
     const { dispatch } = useAuthContext();
 
@@ -29,6 +33,7 @@ function AuthForm() {
 
     async function submitLoginHandler(event) {
         event.preventDefault();
+        setError(null);
         const email = emailInputRef.current.value;
         const password = passwordInputRef.current.value;
         const errors = {
@@ -45,18 +50,24 @@ function AuthForm() {
             // no errors, proceed with login
             const data = await loginWithEmail({ email, password })
             console.log(data)
-            const payload = {
-                user: {
-                    name: data.user.name,
-                    email: data.user.email
-                },
-                token: data.user.idToken
+            if (data.error) {
+                setError(data.error);
+            } else {
+                const payload = {
+                    user: {
+                        name: data.user.name,
+                        email: data.user.email
+                    },
+                    token: data.user.idToken
+                }
+                login(dispatch, payload)
+                history.push('/')
             }
-            login(dispatch, payload)
         }
     }
     async function submitSignupHandler(event) {
         event.preventDefault();
+        setError(null);
         const name = nameInputRef.current.value;
         const email = emailInputRef.current.value;
         const password = passwordInputRef.current.value;
@@ -78,14 +89,19 @@ function AuthForm() {
             passwordInputRef.current.focus()
         } else {
             const data = await signupNewUser({ name, email, password })
-            const payload = {
-                user: {
-                    name: data.user.name,
-                    email: data.user.email
-                },
-                token: data.user.idToken
+            if (data.error) {
+                setError(data.error)
+            } else {
+                const payload = {
+                    user: {
+                        name: data.user.name,
+                        email: data.user.email
+                    },
+                    token: data.user.idToken
+                }
+                login(dispatch, payload)
+                history.push('/')
             }
-            login(dispatch, payload)
         }
     }
 
@@ -143,11 +159,17 @@ function AuthForm() {
                                 type='submit'
                                 className='w-full rounded-md px-2 py-1 border border-gray-700 bg-button-primary focus:outline-none focus:shadow-input active:button-active'>{isLogin ? `Login` : `Create account`}</button>
                         </div>
+                        {error &&
+                            <div>
+                                <p className='text-red-500 text-sm'>{error}</p>
+                            </div>
+                        }
+                        <hr />
                         <div className='mt-2 mb-4'>
                             <p className='text-xs'>{`By creating an account, you agree to Amazon's `}
-                                <Link className='link-minor text-xs' to='#'>Conditions of Use</Link>
+                                <Link className='link-minor text-xs text-blue-500' to='#'>Conditions of Use</Link>
                                 {` and `}
-                                <Link className='link-minor text-xs' to='#'> Privacy Notice</Link>
+                                <Link className='link-minor text-xs text-blue-500' to='#'> Privacy Notice</Link>
                                 {`.`}
                             </p>
                         </div>
@@ -157,9 +179,10 @@ function AuthForm() {
                         >{isLogin ? `Create new account` : `Sign in with existing account`}</button>
                     </div>
                 </form>
+
             </div>
         </section>
     )
 }
 
-export default AuthForm
+export default LoginForm

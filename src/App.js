@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header'
 import Home from './pages/Home'
 import Checkout from './pages/Checkout'
-import Login from './pages/Login';
+import AuthFormPage from './pages/AuthFormPage';
 
 function App() {
   return (
@@ -17,7 +17,10 @@ function App() {
           <Checkout />
         </Route>
         <Route path='/login' exact>
-          <Login />
+          <AuthFormPage login={true} />
+        </Route>
+        <Route path='/changePassword' exact>
+          <AuthFormPage login={false} />
         </Route>
       </Switch>
     </Router>

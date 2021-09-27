@@ -1,18 +1,22 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import HeaderActions from './HeaderActions'
 
 import { useBasketContext } from '../context/BasketProvider'
 import { useAuthContext } from '../context/AuthProvider'
 
+import ProfileActionList from './ProfileActionList'
+
 function Header() {
     const { basket } = useBasketContext();
     const { user, token } = useAuthContext();
+    const [isBackdropActive, setIsBackdropActive] = useState(false)
 
     const isLoggedIn = !!token;
     return (
         <header className='static top-0 font-display'>
             <nav className='py-2 px-4 flex bg-[#131A22] space-x-6'>
-                <div id='nav-logo'>
+                <div id='nav-logo' className='flex flex-col justify-center'>
                     <Link to='/'>
                         <img
                             className='mt-1 max-w-[90px] px-2'
@@ -26,13 +30,22 @@ function Header() {
                     <svg className="w-8 h-8 p-1 rounded-r bg-[#FEBD69] hover:bg-[#F5A946]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 </div>
                 <div className='flex space-x-4'>
-                    {
-                        !isLoggedIn ?
-                            <Link to='/login'>
-                                <HeaderActions primary='Hello, Sign In' secondary='Accounts & Lists' />
-                            </Link>
-                            : <HeaderActions primary={`Hello, ${user.name}`} secondary='Accounts & Lists' />
-                    }
+                    <div
+                        className='relative'
+                        onClick={e => {
+                            console.log(e)
+                            setIsBackdropActive(prev => !prev)
+                        }}
+                    >
+                        {isBackdropActive && <ProfileActionList />}
+                        {
+                            !isLoggedIn ?
+                                <Link to='/login'>
+                                    <HeaderActions primary='Hello, Sign In' secondary='Accounts & Lists' />
+                                </Link>
+                                : <HeaderActions primary={`Hello, ${user.name}`} secondary='Accounts & Lists' />
+                        }
+                    </div>
                     <Link to='#'>
                         <HeaderActions primary='Returns' secondary='& Orders' />
                     </Link>
@@ -46,6 +59,7 @@ function Header() {
                         </div>
                     </Link>
                 </div>
+                <div className={`absolute top-[60px] left-0 w-full h-full opacity-60 z-10 bg-black ${isBackdropActive ? 'block' : 'hidden'}`}></div>
             </nav>
         </header>
     )

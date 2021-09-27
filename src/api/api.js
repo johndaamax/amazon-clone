@@ -1,7 +1,7 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
 const PROJECT_DB_REST_URL = process.env.REACT_APP_PROJECT_DB_REST_URL;
 
-export const loginWithEmail = async ({ email, password }) => {
+export async function loginWithEmail({ email, password }) {
     try {
         //send request to Firebase to login
         const loginRes = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
@@ -34,7 +34,7 @@ export const loginWithEmail = async ({ email, password }) => {
     }
 }
 
-export const signupNewUser = async ({ name, email, password }) => {
+export async function signupNewUser({ name, email, password }) {
     try {
         const signupRes = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
             {
@@ -70,6 +70,33 @@ export const signupNewUser = async ({ name, email, password }) => {
         } else {
             throw new Error('Failed to signup. Please try again!')
         }
+    } catch (error) {
+        return {
+            error: error.message
+        }
+    }
+}
+
+export async function changePassword({ idToken, password, returnSecureToken }) {
+    try {
+        const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`,
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    idToken,
+                    password,
+                    returnSecureToken
+                }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+        if (response.ok) {
+            const data = await response.json()
+            console.log(data)
+            return { user: data }
+        } else {
+            throw new Error('Error changing passwords.')
+        }
+
     } catch (error) {
         return {
             error: error.message
