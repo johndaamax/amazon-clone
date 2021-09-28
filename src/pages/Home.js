@@ -1,22 +1,20 @@
-import { useState, useEffect, useCallback } from "react"
-import Product from "../components/Product"
-
-import Modal from "../components/Modal";
+import { useState, useEffect, useCallback } from 'react'
+import Product from '../components/Product';
 
 function Home() {
     const [products, setProducts] = useState([]);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
     const fetchProducts = useCallback(async () => {
         try {
-            setError(null)
+            setError(null);
             const response = await fetch('https://clone-c6d4c-default-rtdb.europe-west1.firebasedatabase.app/products.json')
             if (!response.ok) {
                 throw new Error('Unable to fetch products from the database.')
             }
-            const data = await response.json()
-            setProducts(data)
+            const data = await response.json();
+            setProducts(data);
         } catch (error) {
-            setError(error.message)
+            setError(error.message);
         }
     }, [])
 
@@ -47,14 +45,6 @@ function Home() {
                     ))}
                 </div>
             }
-            {/* <Modal>
-                <div className='bg-white p-4'>
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                    </ul>
-                </div>
-            </Modal> */}
         </div>
     )
 }
