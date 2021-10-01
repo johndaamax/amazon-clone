@@ -7,11 +7,24 @@ import { useBasketContext } from '../context/BasketProvider';
 import { useAuthContext } from '../context/AuthProvider';
 
 import ProfileActionList from './ProfileActionList';
+import Drawer from '@mui/material/Drawer'
 
 function Header() {
     const { basket } = useBasketContext();
     const { user, token } = useAuthContext();
     const [isBackdropActive, setIsBackdropActive] = useState(false);
+    const [ismobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+    // const classes = ismobileNavOpen ? 'translate-x-[50%]' : 'translate-x-[100%]'
+
+    // function toggleDrawer(open) {
+    //     return function (event) {
+    //         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    //             return;
+    //         }
+    //         setIsMobileNavOpen(open)
+    //     }
+    // }
 
     const isLoggedIn = !!token;
     return (
@@ -63,13 +76,65 @@ function Header() {
                         </Link>
                     </div>
                     <div className='flex items-center md:hidden'>
-                        <MenuIcon />
+                        <MenuIcon toggle={() => setIsMobileNavOpen(prev => !prev)} />
                     </div>
                 </div>
                 <div
                     className={`absolute top-auto left-0 w-full h-full opacity-60 z-10 bg-black ${isBackdropActive ? 'block' : 'hidden'}`}
                     onClick={() => setIsBackdropActive(prev => !prev)}>
                 </div>
+                <Drawer
+                    anchor='left'
+                    open={ismobileNavOpen}
+                    onClose={() => setIsMobileNavOpen(false)}
+                    sx={{
+                        '& .MuiPaper-root': {
+                            backgroundColor: '#131A22',
+                            width: '250px',
+                            maxWidth: '75vw'
+                        }
+                    }}
+                >
+                    <div
+                        className='flex flex-col justify-center px-4 py-6'
+                        id='mobile-nav'
+                        onClick={() => setIsMobileNavOpen(false)}
+                    >
+                        <span
+                            role='button'
+                            className='relative p-2'
+                            onMouseEnter={() => { setIsBackdropActive(true) }}
+                        // onMouseLeave={() => { setIsBackdropActive(false) }}
+                        >
+                            {isBackdropActive && <ProfileActionList anchor='bottom' />}
+                            {
+                                !isLoggedIn ?
+                                    <Link to='/login'>
+                                        <HeaderActions primary='Hello, Sign In' secondary='Accounts & Lists' />
+                                    </Link>
+                                    : <HeaderActions primary={`Hello, ${user.name}`} secondary='Accounts & Lists' />
+                            }
+                        </span>
+                        <span className='p-2'>
+                            <Link to='#' className='mb-4'>
+                                <HeaderActions primary='Returns' secondary='& Orders' />
+                            </Link>
+                        </span>
+                        <span className='p-2'>
+                            <Link to='#' className='mb-4'>
+                                <HeaderActions primary='Your' secondary='Prime' />
+                            </Link>
+                        </span>
+                        <span className='p-2'>
+                            <Link to='/checkout' className='mb-4'>
+                                <div className='flex items-center space-x-2 text-white'>
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                                    <span className='text-center font-bold'>{basket.length}</span>
+                                </div>
+                            </Link>
+                        </span>
+                    </div>
+                </Drawer>
             </nav>
         </header>
     )

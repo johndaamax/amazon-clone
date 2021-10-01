@@ -149,7 +149,7 @@ function LoginForm() {
                             id='password'
                             onChange={() => { inputFieldErrors.password && setInputFieldErrors(prevError => (omit(prevError, ['password']))) }}
                         />
-                        <div className={`${inputFieldErrors?.password ? 'block' : 'hidden'} text-red-500 text-xs`}>
+                        <div className={`${inputFieldErrors.password ? 'block' : 'hidden'} text-red-500 text-xs`}>
                             {inputFieldErrors.password}
                         </div>
                     </div>
