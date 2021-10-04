@@ -31,7 +31,9 @@ function Checkout() {
                                 <button className='py-1 px-2 bg-[#FFD814] hover:bg-[#F0CC18] rounded-lg border border-[#FCD200]'>
                                     <Link to='/login'>Sign in to your account</Link>
                                 </button>
-                                <button className='py-1 px-2 hover:bg-[#F3F3F3] rounded-lg border border-[#D5D9D9] shadow-md'>Sign up now</button>
+                                <button className='py-1 px-2 hover:bg-[#F3F3F3] rounded-lg border border-[#D5D9D9] shadow-md'>
+                                    <Link to='/register'>Sign up now</Link>
+                                </button>
                             </div>
                         }
                     </div>

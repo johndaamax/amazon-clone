@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/**************************     GLOBAL CONFIG STYLES     ***********************/
+
+
 html,
 body {
   overflow-x: hidden;
@@ -52,6 +55,8 @@ body {
     src: url(./fonts/AmazonEmberDisplay_Rg.woff) format('woff');
 }
 
+/**************************     CUSTOMIZED COMPONENT CLASSES     ***********************/
+
 @layer components {
     .link-minor {
         @apply hover:underline hover:text-yellow-500;
@@ -68,11 +73,26 @@ body {
     }
     .nav-action-button,
     .nav-action-button:link {
-        @apply block h-8 mx-3 cursor-pointer outline-none rounded-sm border text-center align-middle text-gray-900 active:bg-[#EEBA37] focus:hover:bg-[#F1C65A];
+        @apply block h-8 mx-3 cursor-pointer outline-none rounded-sm border text-center align-middle text-gray-900;
         border-color: #C89411 #B0820F #99710D;
         box-shadow: inset 0 1px 0 0 #FCF3DC;
         background: linear-gradient(to bottom,#F8E3AD,#EEBA37);
         font-size: 13px;
         line-height: 30px;
+    }
+
+    .nav-action-button:hover,
+    .nav-action-button:focus,
+    .nav-action-button:link:hover,
+    .nav-action-button:link:focus {
+        background: linear-gradient(to bottom,#f6da95,#ecb21f);
+    }
+
+    .nav-action-button:active,
+    .nav-action-button:link:active {
+        background: #EEBA37;
+        -webkit-box-shadow: inset 0 1px 3px 0 #b0820f;
+        -moz-box-shadow: inset 0 1px 3px 0 #b0820f;
+        box-shadow: inset 0 1px 3px 0 #b0820f;
     }
 }

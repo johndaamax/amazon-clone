@@ -4,25 +4,30 @@ import { useAuthContext, logout } from '../context/AuthProvider';
 
 function ProfileActionList({ anchor }) {
     const { token, dispatch } = useAuthContext();
-    function logoutUser() {
-        logout(dispatch);
-    }
-
     const isLoggedIn = !!token;
     const positionClasses = clsx(
         anchor === 'top' && `-bottom-full left-0 right-0`,
         anchor === 'bottom' && `top-full left-0 right-0`
-    )
+    );
+
+    function logoutUser() {
+        logout(dispatch);
+        window.location.href = '/';
+    }
+
     return (
-        <div className={`p-4 rounded-sm bg-white absolute z-20 whitespace-nowrap font-display ${positionClasses}`}>
+        <div className={`min-w-min p-4 rounded-sm bg-white absolute z-20 whitespace-nowrap font-display ${positionClasses}`}>
             {!isLoggedIn &&
-                <div className='pb-4 border-b border-gray-200 text-center'>
+                <div className='pb-2 border-b border-gray-200 text-center'>
                     <Link to='/login'
                         className='nav-action-button'>Login
                     </Link>
+                    <div className='text-center text-xs my-2'>
+                        {`New customer? `}<Link to='/register' className='link-minor text-blue-400'>Start here.</Link>
+                    </div>
                 </div>
             }
-            <div>
+            <div className='mt-2'>
                 <h3 className='font-bold text-lg mb-2'>Your Account </h3>
                 {isLoggedIn &&
                     <ul className='text-xs'>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderActions from './HeaderActions';
 import MenuIcon from './MenuIcon';
@@ -14,23 +14,14 @@ function Header() {
     const { user, token } = useAuthContext();
     const [isBackdropActive, setIsBackdropActive] = useState(false);
     const [ismobileNavOpen, setIsMobileNavOpen] = useState(false);
-
-    // const classes = ismobileNavOpen ? 'translate-x-[50%]' : 'translate-x-[100%]'
-
-    // function toggleDrawer(open) {
-    //     return function (event) {
-    //         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    //             return;
-    //         }
-    //         setIsMobileNavOpen(open)
-    //     }
-    // }
+    let pageHeight = useRef();
+    console.log(pageHeight)
 
     const isLoggedIn = !!token;
     return (
         <header className='static top-0 font-display'>
-            <nav className='relative'>
-                <div className='py-2 px-2 sm:px-4 flex bg-[#131A22] space-x-6'>
+            <nav className='relative z-50'>
+                <div className='py-2 px-4 lg:px-2 flex bg-[#131A22] space-x-4'>
                     <div id='nav-logo' className='flex flex-col justify-center'>
                         <Link to='/'>
                             <img
@@ -49,26 +40,24 @@ function Header() {
                         id='desktop-nav'
                     >
                         <div
-                            className='relative'
-                            onClick={() => { setIsBackdropActive(prev => !prev) }}
+                            className='relative py-1'
+                            onMouseEnter={() => {
+                                pageHeight.current = document.documentElement.scrollHeight;
+                                setIsBackdropActive(true)
+                            }}
+                            onMouseLeave={() => { setIsBackdropActive(false) }}
                             role='button'
                         >
-                            {isBackdropActive && <ProfileActionList />}
-                            {
-                                !isLoggedIn ?
-                                    <Link to='/login'>
-                                        <HeaderActions primary='Hello, Sign In' secondary='Accounts & Lists' />
-                                    </Link>
-                                    : <HeaderActions primary={`Hello, ${user.name}`} secondary='Accounts & Lists' />
-                            }
+                            {isBackdropActive && <ProfileActionList anchor='bottom' />}
+                            <HeaderActions primary={`Hello, ${isLoggedIn ? `${user.name}` : 'Sign In'}`} secondary='Accounts & Lists' />
                         </div>
-                        <Link to='#'>
+                        <Link to='#' className='py-1'>
                             <HeaderActions primary='Returns' secondary='& Orders' />
                         </Link>
-                        <Link to='#'>
+                        <Link to='#' className='py-1'>
                             <HeaderActions primary='Your' secondary='Prime' />
                         </Link>
-                        <Link to='/checkout'>
+                        <Link to='/checkout' className='py-1'>
                             <div className='flex items-center space-x-2 text-white'>
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                                 <span className='text-center font-bold'>{basket.length}</span>
@@ -79,10 +68,17 @@ function Header() {
                         <MenuIcon toggle={() => setIsMobileNavOpen(prev => !prev)} />
                     </div>
                 </div>
-                <div
-                    className={`absolute top-auto left-0 w-full h-full opacity-60 z-10 bg-black ${isBackdropActive ? 'block' : 'hidden'}`}
-                    onClick={() => setIsBackdropActive(prev => !prev)}>
-                </div>
+                {
+                    isBackdropActive &&
+                    <div
+                        className={`hidden absolute top-0 left-0 opacity-100 w-full z-[-1] bg-black md:block md:opacity-60`}
+                        style={{
+                            height: `${pageHeight.current || 0}px`,
+                            transition: 'opacity 0.7s ease-in-out 500ms'
+                        }}
+                        onClick={() => setIsBackdropActive(prev => !prev)}>
+                    </div>
+                }
                 <Drawer
                     anchor='left'
                     open={ismobileNavOpen}
@@ -98,22 +94,15 @@ function Header() {
                     <div
                         className='flex flex-col justify-center px-4 py-6'
                         id='mobile-nav'
-                        onClick={() => setIsMobileNavOpen(false)}
+                    // onClick={() => setIsMobileNavOpen(false)}
                     >
                         <span
                             role='button'
                             className='relative p-2'
-                            onMouseEnter={() => { setIsBackdropActive(true) }}
-                        // onMouseLeave={() => { setIsBackdropActive(false) }}
+                            onClick={() => { setIsBackdropActive(prev => !prev) }}
                         >
                             {isBackdropActive && <ProfileActionList anchor='bottom' />}
-                            {
-                                !isLoggedIn ?
-                                    <Link to='/login'>
-                                        <HeaderActions primary='Hello, Sign In' secondary='Accounts & Lists' />
-                                    </Link>
-                                    : <HeaderActions primary={`Hello, ${user.name}`} secondary='Accounts & Lists' />
-                            }
+                            <HeaderActions primary={`Hello, ${isLoggedIn ? `${user.name}` : 'Sign In'}`} secondary='Accounts & Lists' />
                         </span>
                         <span className='p-2'>
                             <Link to='#' className='mb-4'>

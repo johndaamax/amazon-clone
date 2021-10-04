@@ -13,7 +13,7 @@ function Product({ id, title, image, price, rating, shippingWeight }) {
     const productsInBasket = getProductQuantityInBasket()
 
     return (
-        <div className='flex flex-col m-4 min-w-[180px] bg-white p-4 z-[1]'>
+        <div className='flex flex-col m-4 min-w-[180px] bg-white p-4'>
             <div className='m-auto w-[180px]'>
                 <img
                     className='m-auto w-auto max-h-[180px] object-cover'

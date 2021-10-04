@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import LoginForm from '../components/LoginForm'
 import ChangePasswordForm from '../components/ChangePasswordForm'
 
-function AuthFormPage({ login }) {
+function AuthFormPage({ activeForm }) {
     return (
         <div className='flex flex-col justify-center items-center p-4 my-0 mx-auto font-display w-[350px] md:w-[700px]'>
             <div className='mb-4 max-w-[120px] px-2'>
@@ -15,7 +15,9 @@ function AuthFormPage({ login }) {
                 </Link>
             </div>
             <div>
-                {login ? <LoginForm /> : <ChangePasswordForm />}
+                {activeForm === 'login' && <LoginForm activeForm='login' />}
+                {activeForm === 'register' && <LoginForm activeForm='register' />}
+                {activeForm === 'changePassword' && <ChangePasswordForm />}
             </div>
         </div>
     )

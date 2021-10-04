@@ -6,29 +6,23 @@ import { validateName, validateEmail, validatePassword } from '../validationRule
 import { loginWithEmail, signupNewUser } from '../api/api';
 import { useAuthContext, login } from '../context/AuthProvider'
 
-function LoginForm() {
-    const [isLogin, setIsLogin] = useState(true);
+function LoginForm({ activeForm }) {
     const [inputFieldErrors, setInputFieldErrors] = useState({});
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
+    const isLogin = activeForm === 'login';
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
-    const history = useHistory()
-
-    console.log(error)
+    const history = useHistory();
 
     const { dispatch } = useAuthContext();
 
     function toggleAuthMode() {
         //toggle between login and signup forms
-        setIsLogin(prevMode => !prevMode);
-        setInputFieldErrors({});
-        if (nameInputRef && nameInputRef.current)
-            nameInputRef.current.value = '';
-        if (emailInputRef && emailInputRef.current)
-            emailInputRef.current.value = '';
-        if (passwordInputRef && passwordInputRef.current)
-            passwordInputRef.current.value = '';
+        if (isLogin)
+            history.push('/register');
+        else
+            history.push('/login');
     }
 
     async function submitLoginHandler(event) {
@@ -61,7 +55,7 @@ function LoginForm() {
                     token: data.user.idToken
                 }
                 login(dispatch, payload)
-                history.push('/')
+                history.replace('/');
             }
         }
     }
@@ -100,7 +94,7 @@ function LoginForm() {
                     token: data.user.idToken
                 }
                 login(dispatch, payload)
-                history.push('/')
+                history.replace('/')
             }
         }
     }
@@ -179,7 +173,6 @@ function LoginForm() {
                         >{isLogin ? `Create new account` : `Sign in with existing account`}</button>
                     </div>
                 </form>
-
             </div>
         </section>
     )

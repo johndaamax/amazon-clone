@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react'
+import { useHistory } from 'react-router-dom';
+
 import { useAuthContext } from '../context/AuthProvider'
 import { validatePassword } from '../validationRules';
 import { changePassword } from '../api/api'
@@ -7,6 +9,7 @@ function ChangePasswordForm() {
     const [inputFieldErrors, setInputFieldErrors] = useState({});
     const [error, setError] = useState(null);
     const { token } = useAuthContext();
+    const history = useHistory();
 
     const changePasswordInputRef = useRef();
 
@@ -24,6 +27,7 @@ function ChangePasswordForm() {
             const data = changePassword({ idToken: token, password });
             if (!data.error) {
                 //show message to user that password was changed successfully and redirect to home page after some seconds ( or have a button to click)
+                history.replace('/')
             } else {
                 setError(data.error)
             }

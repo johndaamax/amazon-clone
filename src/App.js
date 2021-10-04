@@ -1,10 +1,14 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { useAuthContext } from './context/AuthProvider'
 import Header from './components/Header'
 import Home from './pages/Home'
 import Checkout from './pages/Checkout'
 import AuthFormPage from './pages/AuthFormPage';
 
 function App() {
+
+  const { token } = useAuthContext();
+  const isLoggedIn = !!token;
   return (
     <Router>
       <Switch>
@@ -12,15 +16,30 @@ function App() {
           <Header />
           <Home />
         </Route>
-        <Route path='/checkout' exact>
+        <Route path='/checkout'>
           <Header />
           <Checkout />
         </Route>
-        <Route path='/login' exact>
-          <AuthFormPage login={true} />
+        <Route path='/login'>
+          {!isLoggedIn ?
+            <AuthFormPage activeForm='login' /> :
+            <Redirect to='/' />
+          }
         </Route>
-        <Route path='/changePassword' exact>
-          <AuthFormPage login={false} />
+        <Route path='/register'>
+          {!isLoggedIn ?
+            <AuthFormPage activeForm='register' /> :
+            <Redirect to='/' />
+          }
+        </Route>
+        <Route path='/changePassword'>
+          {isLoggedIn ?
+            <AuthFormPage activeForm='changePassword' /> :
+            <Redirect to='/' />
+          }
+        </Route>
+        <Route path='*'>
+          <Redirect to='/' />
         </Route>
       </Switch>
     </Router>
