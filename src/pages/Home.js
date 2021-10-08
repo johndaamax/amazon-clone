@@ -31,7 +31,7 @@ function Home() {
                 alt='Banner' />
             {error && <div className='mt-8 p-4 text-center text-red-600 text-xl'>{error}</div>}
             {products.length > 0 &&
-                <div className='grid sm:grid-cols-2 lg:grid-cols-3 my-2'>
+                <div className='grid sm:grid-cols-2 lg:grid-cols-3 mt-2'>
                     {products.map(product => (
                         <Product
                             key={product.id}
