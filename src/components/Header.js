@@ -31,7 +31,7 @@ function Header() {
     }
     return (
         <header className='static top-0 font-display'>
-            <nav className='relative z-50'>
+            <nav id='nav-top' className='relative z-50'>
                 <div className='py-2 px-4 lg:px-2 flex bg-[#131A22] space-x-4'>
                     <div id='nav-logo' className='flex flex-col justify-center'>
                         <Link to='/'>

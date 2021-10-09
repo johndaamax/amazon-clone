@@ -6,12 +6,15 @@ function CheckoutProduct({ id, title, image, price, rating }) {
     const ratingCoords = ratingMap.get(rating);
 
     return (
-        <div className='flex my-3 bg-white border-b border-gray-300'>
-            <img
-                className='object-contain w-[180px] h-[180px]'
-                src={image}
-                alt={title}
-            />
+        <div className='flex my-3 py-4 bg-white border-b border-gray-300'>
+            <div className='w-[180px]'>
+                <img
+                    className='m-auto w-auto max-h-[180px] object-cover'
+                    src={image}
+                    alt={title}
+                />
+
+            </div>
             <div className='pl-4'>
                 <p className='text-lg font-bold'>{title}</p>
                 <p>

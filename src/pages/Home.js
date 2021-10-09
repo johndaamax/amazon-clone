@@ -1,9 +1,12 @@
-import { useState, useEffect, useCallback } from 'react'
-import Product from '../components/Product';
+import { useState, useEffect, useCallback } from 'react';
+import { HashLink } from 'react-router-hash-link';
+
+import CategoryList from '../components/CategoryList';
 
 function Home() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
+    const productCategoriesList = ['Toys & Games', 'Video Games', 'Home & Kitchen'];
     const fetchProducts = useCallback(async () => {
         try {
             setError(null);
@@ -31,20 +34,13 @@ function Home() {
                 alt='Banner' />
             {error && <div className='mt-8 p-4 text-center text-red-600 text-xl'>{error}</div>}
             {products.length > 0 &&
-                <div className='grid sm:grid-cols-2 lg:grid-cols-3 mt-2'>
-                    {products.map(product => (
-                        <Product
-                            key={product.id}
-                            id={product.id}
-                            title={product.title}
-                            rating={product.rating}
-                            price={product.price}
-                            image={product.image}
-                            shippingWeight={product.shippingWeight}
-                        />
-                    ))}
-                </div>
+                productCategoriesList.map(item => <CategoryList list={products.filter(p => p.category === item)} title={item} />)
             }
+            <div className='w-full' aria-label='Back to top'>
+                <HashLink to='#nav-top'>
+                    <div className='w-full bg-[#37475A] text-sm text-center py-4 text-white hover:bg-[#485769]'>Back to top</div>
+                </HashLink>
+            </div>
         </div>
     )
 }

@@ -14,11 +14,11 @@ function Product({ id, title, image, price, rating, shippingWeight }) {
 
     return (
         <div className='flex flex-col m-4 min-w-[180px] bg-white p-4'>
-            <div className='m-auto w-[180px]'>
+            <div className='m-auto w-[180px]' title={title}>
                 <img
                     className='m-auto w-auto max-h-[180px] object-cover'
                     src={image}
-                    alt='' />
+                    alt={title} />
             </div>
             <div className='my-4'>
                 <p>{title}</p>
