@@ -11,7 +11,7 @@ function Checkout() {
     const isLoggedIn = !!token;
 
     return (
-        <div className='h-max font-body'>
+        <div className='font-body'>
             <div>
                 <img
                     className='mb-2 oblect-contain'
