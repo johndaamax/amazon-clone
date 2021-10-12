@@ -33,20 +33,18 @@ export default function Dropdown({ title, list, handleChangedIndex }) {
                         className="absolute top-0 right-0 mt-1 z-[1] origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         {list.map((item, index) => {
                             return (
-                                <div>
-                                    <Menu.Item>
-                                        {({ active }) => {
-                                            const classes = clsx('group flex rounded-sm items-center w-full px-2 py-1 text-sm text-gray-900', active && 'bg-gray-300');
-                                            return (
-                                                <span role='button'
-                                                    className={classes}
-                                                    onClick={(event) => handleMenuItemClick(event, index)}
-                                                >
-                                                    {item}
-                                                </span>)
-                                        }}
-                                    </Menu.Item>
-                                </div>
+                                <Menu.Item key={item}>
+                                    {({ active }) => {
+                                        const classes = clsx('group flex rounded-sm items-center w-full px-2 py-1 text-sm text-gray-900', active && 'bg-gray-300');
+                                        return (
+                                            <button
+                                                className={classes}
+                                                onClick={(event) => handleMenuItemClick(event, index)}
+                                            >
+                                                {item}
+                                            </button>)
+                                    }}
+                                </Menu.Item>
                             )
                         })}
                     </Menu.Items>

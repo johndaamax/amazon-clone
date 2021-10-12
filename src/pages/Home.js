@@ -34,7 +34,7 @@ function Home() {
                 alt='Banner' />
             {error && <div className='mt-8 p-4 text-center text-red-600 text-xl'>{error}</div>}
             {products.length > 0 &&
-                productCategoriesList.map(item => <CategoryList list={products.filter(p => p.category === item)} title={item} />)
+                productCategoriesList.map(item => <CategoryList key={item} list={products.filter(p => p.category === item)} title={item} />)
             }
             <div className='w-full' aria-label='Back to top'>
                 <HashLink to='#nav-top'>

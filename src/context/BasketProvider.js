@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import { reducer } from '../reducers/basket/reducer';
+import * as actionTypes from '../reducers/basket/actionTypes'
 
 const BasketContext = createContext();
 
@@ -19,11 +20,15 @@ function BasketProvider({ children }) {
 }
 
 const addToBasket = (dispatch, item) => {
-    dispatch({ type: 'ADD_TO_BASKET', payload: item })
+    dispatch({ type: actionTypes.ADD_ITEM_TO_BASKET, payload: { ...item, quantity: 1 } })
 }
 
 const removeFromBasket = (dispatch, id) => {
-    dispatch({ type: 'REMOVE_FROM_BASKET', payload: id })
+    dispatch({ type: actionTypes.REMOVE_ITEM_FROM_BASKET, payload: id })
+}
+
+const setQuantity = (dispatch, id, quantity) => {
+    dispatch({ type: actionTypes.SET_QUANTITY, payload: { id, quantity } })
 }
 
 const useBasketContext = () => {
@@ -33,4 +38,4 @@ const useBasketContext = () => {
     return context
 }
 
-export { BasketProvider, useBasketContext, addToBasket, removeFromBasket }
+export { BasketProvider, useBasketContext, addToBasket, removeFromBasket, setQuantity }

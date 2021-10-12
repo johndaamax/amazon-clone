@@ -5,7 +5,6 @@ import { ratingMap } from '../helpers/ratingStarHelper'
 function Product({ id, title, image, price, rating, shippingWeight }) {
     const { basket, dispatch } = useBasketContext();
     const ratingCoords = ratingMap.get(rating)
-
     const getProductQuantityInBasket = () => {
         return basket.filter(prod => prod.id === id).length;
     }
@@ -40,9 +39,10 @@ function Product({ id, title, image, price, rating, shippingWeight }) {
                 <p>{`Shipping Weight: ${shippingWeight.value} ${shippingWeight.unit}`}</p>
             </div>
             <button
-                className='p-1 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-solid border-[#A88734]'
+                className='p-1 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-solid border-[#A88734] disabled:opacity-50 disabled:cursor-not-allowed'
                 onClick={() => addToBasket(dispatch, { id, title, image, price, rating })}
-            >{productsInBasket > 0 ? `Added to basket (x${productsInBasket})` : `Add to basket`}
+                disabled={productsInBasket > 0}
+            >{productsInBasket > 0 ? `Already in basket` : `Add to basket`}
             </button>
         </div>
     )
