@@ -40,15 +40,12 @@ function Checkout() {
                         }
                     </div>
                 </div> :
-                <div className='flex flex-col-reverse sm:flex-row border-b border-gray-300'>
-                    <div className='bg-white px-6 py-2 mr-4 sm:w-[70%]'>
-                        <div className='w-full'>
+                <div className='flex flex-col-reverse md:flex-row border-b border-gray-300'>
+                    <div className='bg-white px-6 py-2 md:mr-4 md:w-[70%]'>
+                        <div className='py-2 border-b border-gray-300'>
                             <h1 className='text-3xl'>Shopping basket</h1>
                         </div>
-                        <div>
-                            <div className='flex justify-end w-full items-header border-b border-gray-300'>
-                                <span>Price</span>
-                            </div>
+                        <div className='py-4 grid gap-2'>
                             {basket.map(item =>
                                 <CheckoutProduct
                                     key={item.id}
@@ -60,7 +57,7 @@ function Checkout() {
                                 />)}
                         </div>
                     </div>
-                    <aside className='float-right sm:w-[30%]'>
+                    <aside className='float-right md:w-[30%]'>
                         <Subtotal price={totalPrice} quantity={totalItems} />
                     </aside>
                 </div>

@@ -9,7 +9,7 @@ function Subtotal({ price, quantity }) {
                     <input type='checkbox' className='mr-2' /> This order contains a gift
                 </small>
             </div>
-            <button className='w-full h-[30px] mt-2 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-[#A88734]'>Proceed to checkout </button>
+            <button className='md:w-max md:px-4 md:self-center h-[30px] mt-2 rounded-sm bg-[#FEBD69] hover:bg-[#F5A946] border border-[#A88734]'>Proceed to checkout </button>
         </div>
     )
 }
