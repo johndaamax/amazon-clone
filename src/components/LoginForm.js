@@ -17,14 +17,6 @@ function LoginForm({ activeForm }) {
 
     const { dispatch } = useAuthContext();
 
-    function toggleAuthMode() {
-        //toggle between login and signup forms
-        if (isLogin)
-            history.push('/register');
-        else
-            history.push('/login');
-    }
-
     async function submitLoginHandler(event) {
         event.preventDefault();
         setError(null);
@@ -43,7 +35,6 @@ function LoginForm({ activeForm }) {
         } else {
             // no errors, proceed with login
             const data = await loginWithEmail({ email, password })
-            console.log(data)
             if (data.error) {
                 setError(data.error);
             } else {
@@ -159,7 +150,7 @@ function LoginForm({ activeForm }) {
                             </div>
                         }
                         <hr />
-                        <div className='mt-2 mb-4'>
+                        <div className='mt-2 mb-6'>
                             <p className='text-xs'>{`By creating an account, you agree to Amazon's `}
                                 <Link className='link-minor text-xs text-blue-500' to='#'>Conditions of Use</Link>
                                 {` and `}
@@ -167,10 +158,21 @@ function LoginForm({ activeForm }) {
                                 {`.`}
                             </p>
                         </div>
-                        <button
-                            type='button'
-                            onClick={toggleAuthMode}
-                        >{isLogin ? `Create new account` : `Sign in with existing account`}</button>
+                        <div className='pt-4 border-t border-[#E7E7E7]'>
+                            {isLogin ?
+                                <div className='text-center text-sm font-bold'> {`New to Amazon? `}
+                                    <Link className='link-minor text-sm text-blue-500' to='/register'>
+                                        Create your Amazon account
+                                    </Link>
+                                </div> :
+                                <div className='text-center text-sm font-bold'>
+                                    {`Already have an account? `}
+                                    <Link className='link-minor text-sm text-blue-500' to='/login'>
+                                        Sign in
+                                    </Link>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </form>
             </div>

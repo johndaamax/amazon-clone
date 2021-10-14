@@ -19,7 +19,7 @@ export async function loginWithEmail({ email, password }) {
             //after succesful login, query the DB using the returned localId of the user to fetch other details, like the name
             const res = await fetch(`${PROJECT_DB_REST_URL}/users.json?orderBy="$key"&startAt="${data.localId}"&limitToFirst=1`)
             if (res.ok) {
-                const user = await res.json()
+                const user = await res.json();
                 return ({ user: { ...data, ...user[data.localId] } })
             } else {
                 throw new Error('Unable to match user information in our database with the provided details. Try again using different credentials.')
@@ -61,8 +61,16 @@ export async function signupNewUser({ name, email, password }) {
                     headers: { 'Content-Type': 'application/json' }
                 })
             if (res.ok) {
-                const user = await res.json()
-                return ({ user: { ...data, ...user } })
+                const user = await res.json();
+                /** user has the structure of
+                 *  {
+                 *      [data.localId]: {
+                 *          email: .....
+                 *          name: .....
+                 *  }}
+                 * 
+                 */
+                return ({ user: { ...data, ...user[data.localId] } })
             } else {
                 //Fired when there is an error saving user to the database. Should not happen. Will cause state mismatch between auth server and user database!!!
                 throw new Error('Error in saving user to the database. Try signing up again.')

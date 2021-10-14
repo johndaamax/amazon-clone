@@ -3,13 +3,16 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BasketProvider } from './context/BasketProvider';
 import { AuthProvider } from './context/AuthProvider';
+import { ProductsProvider } from './context/ProductsProvider';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <BasketProvider>
       <AuthProvider>
-        <App />
+        <ProductsProvider>
+          <App />
+        </ProductsProvider>
       </AuthProvider>
     </BasketProvider>
   </React.StrictMode>,

@@ -22,7 +22,10 @@ module.exports = {
       },
       textColor: {
         success: '#007600',
-        secondary: '#565959'
+        secondary: '#565959',
+      },
+      colors: {
+        highlight: '#007185'
       }
     }
   },

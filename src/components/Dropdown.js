@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import clsx from 'clsx';
 
-export default function Dropdown({ title, list, handleChangedIndex }) {
+export default function Dropdown({ title, list, handleChangedIndex, selectedIndex }) {
 
     function handleMenuItemClick(_, index) {
         handleChangedIndex(index);
@@ -11,7 +11,7 @@ export default function Dropdown({ title, list, handleChangedIndex }) {
 
     return (
         <Menu as="div" className="relative inline-block text-left">
-            <div style={{}}>
+            <div>
                 <Menu.Button
                     className="inline-flex justify-center rounded-[8px] w-full px-2 py-2 text-sm font-medium text-gray-700 shadow-md bg-[#F0F2F2] bg-opacity-30 shadow-dropdownNormal hover:bg-opacity-90 focus:outline-none focus:ring-1 focus:ring-[#007185] focus:shadow-dropdownFocus"
                 >
@@ -32,12 +32,15 @@ export default function Dropdown({ title, list, handleChangedIndex }) {
                 leaveTo="transform opacity-0 scale-95"
             >
                 <Menu.Items
-                    className="absolute top-0 right-0 mt-1 z-[1] origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    className='absolute top-0 right-0 mt-1 z-[1] origin-top-right bg-white rounded-md border border-gray-200 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                     {list.map((item, index) => {
                         return (
                             <Menu.Item key={item}>
                                 {({ active }) => {
-                                    const classes = clsx('group flex rounded-sm items-center w-full px-2 py-1 text-sm text-gray-900', active && 'bg-gray-300');
+                                    const classes = clsx(
+                                        'group flex items-center w-full px-3 py-1 text-xs text-gray-900 border border-transparent',
+                                        active && 'border-[#D5D9D9] bg-[#F0F2F2]',
+                                        selectedIndex === index && 'bg-[#EDFDFF] border-[#D5D9D9] border-l-highlight');
                                     return (
                                         <button
                                             className={classes}

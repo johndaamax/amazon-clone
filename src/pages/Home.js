@@ -1,25 +1,28 @@
 import { useState, useEffect, useCallback } from 'react';
 import { HashLink } from 'react-router-hash-link';
+import { useProductsContext } from '../context/ProductsProvider';
 
 import CategoryList from '../components/CategoryList';
 
 function Home() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useProductsContext();
     const [error, setError] = useState(null);
     const productCategoriesList = ['Toys & Games', 'Video Games', 'Home & Kitchen'];
     const fetchProducts = useCallback(async () => {
-        try {
-            setError(null);
-            const response = await fetch('https://clone-c6d4c-default-rtdb.europe-west1.firebasedatabase.app/products.json')
-            if (!response.ok) {
-                throw new Error('Unable to fetch products from the database.')
+        if (products.length === 0) {
+            try {
+                setError(null);
+                const response = await fetch('https://clone-c6d4c-default-rtdb.europe-west1.firebasedatabase.app/products.json')
+                if (!response.ok) {
+                    throw new Error('Unable to fetch products from the database.')
+                }
+                const data = await response.json();
+                setProducts(data);
+            } catch (error) {
+                setError(error.message);
             }
-            const data = await response.json();
-            setProducts(data);
-        } catch (error) {
-            setError(error.message);
         }
-    }, [])
+    }, [products, setProducts])
 
     useEffect(() => {
         fetchProducts()

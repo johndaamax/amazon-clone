@@ -11,7 +11,7 @@ function Checkout() {
     const totalItems = basket.reduce((acc, cv) => acc + cv.quantity, 0);
     const totalPrice = basket.reduce((acc, cv) => acc + cv.quantity * cv.price.value, 0);
     const isLoggedIn = !!token;
-    console.log(basket);
+
     return (
         <div className='font-body'>
             <div>

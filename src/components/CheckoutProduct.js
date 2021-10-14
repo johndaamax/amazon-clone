@@ -51,6 +51,7 @@ function CheckoutProduct({ id, title, image, price, rating }) {
                             title={`Qty: ${quantity}`}
                             list={['0 (Delete)', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10+']}
                             handleChangedIndex={(index) => handleQuantityChange(id, index)}
+                            selectedIndex={quantity}
                         />
                     </span>
                     <button

@@ -31,9 +31,9 @@ function Header() {
         }
     }
     return (
-        <header className='sticky top-0 font-display'>
+        <header className='sticky top-0 font-display z-30'>
             <nav id='nav-top' className='relative z-50'>
-                <div className='py-2 px-4 lg:px-2 flex bg-[#131A22] space-x-3'>
+                <div className='py-2 px-4 lg:px-2 flex bg-[#131A22] space-x-3 z-50'>
                     <div id='nav-logo' className='flex flex-col justify-center'>
                         <Link to='/'>
                             <img
@@ -81,7 +81,7 @@ function Header() {
                     </div>
                 </div>
                 <div
-                    className={`hidden md:block absolute top-0 left-0 w-full z-[-1] bg-black ${backdropClasses}`}
+                    className={`hidden md:block absolute top-0 left-0 z-[-1] transform-gpu w-full bg-black ${backdropClasses}`}
                     style={{
                         height: `${pageHeight.current || 0}px`,
                         transition: 'all 0.5s ease-in-out'
